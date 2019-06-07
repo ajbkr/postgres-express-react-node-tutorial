@@ -16,5 +16,22 @@ module.exports = {
       }]
     })
     .then(todos => res.status(200).send(todos))
+    .catch(error => res.status(400).send(error)),
+
+  retrieve: (req, res) => Todo
+    .findByPk(req.params.todoId, {
+      include: [{
+        as: 'todoItems',
+        model: TodoItem
+      }]
+    })
+    .then(todo => {
+      if ( !todo) {
+        return res.status(404).send({
+          message: 'Todo Not Found'
+        })
+      }
+      return res.status(200).send(todo)
+    })
     .catch(error => res.status(400).send(error))
 }
