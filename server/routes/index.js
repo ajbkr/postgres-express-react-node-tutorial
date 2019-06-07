@@ -1,5 +1,7 @@
-const todoItemsController = require('../controllers').todoItems
-const todosController = require('../controllers').todos
+const {
+  todoItems: todoItemsController,
+  todos: todosController
+} = require('../controllers')
 
 module.exports = app => {
   app.get('/api', (req, res) => res.status(200).send({
